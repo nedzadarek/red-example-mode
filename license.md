@@ -1,0 +1,3 @@
+- You can use/modify everywhere
+- There is no warranties
+- You should point to this github (attribution)
