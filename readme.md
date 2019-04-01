@@ -47,6 +47,7 @@ Adds multiline support.
     eee
     }
 ; {^/qqq^/www^/eee^/}
+```
 Longer output with `...`:
 ```
   [
