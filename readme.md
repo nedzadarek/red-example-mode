@@ -32,3 +32,47 @@ This code allows you to copy an input and output from one console and paste & ru
   >>   print ["Your name is: " name]
   Your name is:  Baz
 ```
+#### Version 0.1.1
+
+Adds multiline support.
+`[` and `{` will be deleted:
+```
+  [
+    aaa
+    bbb
+    cc
+    ]{
+    qqq
+    www
+    eee
+    }
+; {^/qqq^/www^/eee^/}
+Longer output with `...`:
+```
+  [
+    a
+    b
+    c
+    d
+    e
+    f
+    g
+    h
+    i
+    j
+    k
+    l
+    ]
+; [
+;     a 
+;     b 
+;     c 
+;     d 
+;     e 
+;     f 
+;     g 
+;     h 
+;     i 
+;     j 
+;     k...
+```

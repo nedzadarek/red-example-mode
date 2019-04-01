@@ -1,15 +1,41 @@
 Red [
   author: "Nędza Darek"
   license: %license.md
-  version: 0.0.1
+  version: 0.1.1
   subversion: 'alpha
 ]
 ___old-console: copy/deep :system/console
 ___old-pre-load: :system/lexer/pre-load
-example-mode: does [
+___line-numbers: [1]
+
+example-mode: function [] [
   system/console/result: func [src][insert src "; " src]
+  system/console/result: function [result] [
+    insert result "; "
+    result: skip result 2
+    forall result [
+        if result/1 = newline [
+            insert (next result) "; "
+            result: skip result 3
+        ] 
+    ]
+    head result
+  ]
   system/console/prompt: "  "
-  system/lexer/pre-load: func [src][
+  system/lexer/pre-load: function [src][
+  
+    
+    append ___line-numbers length? gui-console-ctx/terminal/lines
+    last-line: last ___line-numbers
+    pre-last-line: first back back tail ___line-numbers
+    repeat ind (last-line - pre-last-line)  [
+        current-line: gui-console-ctx/terminal/lines/(pre-last-line + ind)
+        if any [current-line/1 = #"["  current-line/1 = #"{" ] [
+            remove current-line
+        ]
+    ]
+
+  
     if any [
       find src "prin*"
       find src "print*"
