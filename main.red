@@ -1,13 +1,17 @@
 Red [
   author: "Nędza Darek"
   license: %license.md
-  version: 0.1.2
+  version: 0.2.2
   subversion: 'alpha
 ]
 ___old-console: copy/deep :system/console
 ___old-pre-load: :system/lexer/pre-load
 ___line-numbers: [1]
-
+clean-console: does [
+    gui-console-ctx/terminal/clean
+    remove back tail gui-console-ctx/terminal/lines
+    ()
+]
 
 example-mode: function [] [
   system/console/result: function [result] [

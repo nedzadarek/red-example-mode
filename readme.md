@@ -87,3 +87,6 @@ Fix not commenting errors:
 ; *** Where: /
 ; *** Stack:
 ```
+#### Version 0.2.1
+
+Adds `clean-console` function.
