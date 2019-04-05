@@ -1,15 +1,15 @@
 Red [
   author: "Nędza Darek"
   license: %license.md
-  version: 0.1.1
+  version: 0.1.2
   subversion: 'alpha
 ]
 ___old-console: copy/deep :system/console
 ___old-pre-load: :system/lexer/pre-load
 ___line-numbers: [1]
 
+
 example-mode: function [] [
-  system/console/result: func [src][insert src "; " src]
   system/console/result: function [result] [
     insert result "; "
     result: skip result 2
@@ -21,21 +21,24 @@ example-mode: function [] [
     ]
     head result
   ]
-  system/console/prompt: "  "
-  system/lexer/pre-load: function [src][
-  
-    
-    append ___line-numbers length? gui-console-ctx/terminal/lines
-    last-line: last ___line-numbers
-    pre-last-line: first back back tail ___line-numbers
-    repeat ind (last-line - pre-last-line)  [
-        current-line: gui-console-ctx/terminal/lines/(pre-last-line + ind)
-        if any [current-line/1 = #"["  current-line/1 = #"{" ] [
-            remove current-line
+  system/console/prompt: function [] [
+        append ___line-numbers length? gui-console-ctx/terminal/lines
+        last-line: last ___line-numbers
+        before-last-line: first back back tail ___line-numbers
+        repeat ind (last-line - before-last-line)  [
+            current-line: gui-console-ctx/terminal/lines/(before-last-line + ind)
+            if any [current-line/1 = #"["  current-line/1 = #"{" ] [
+                remove current-line
+            ]
+            ; errors are not handled by system/console/result
+            if "***" = copy/part current-line 3 [
+                
+                insert current-line "; "
+            ]
         ]
+        return "  "
     ]
-
-  
+  system/lexer/pre-load: function [src][
     if any [
       find src "prin*"
       find src "print*"

@@ -77,3 +77,13 @@ Longer output with `...`:
 ;     j 
 ;     k...
 ```
+
+#### Version 0.1.2
+
+Fix not commenting errors:
+```
+  2 / 0
+; *** Math Error: attempt to divide by zero
+; *** Where: /
+; *** Stack:
+```
