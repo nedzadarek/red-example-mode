@@ -90,3 +90,7 @@ Fix not commenting errors:
 #### Version 0.2.1
 
 Adds `clean-console` function.
+
+#### Version 0.2.3
+
+Fix some multiline issues.

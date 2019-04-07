@@ -1,12 +1,20 @@
 Red [
   author: "Nędza Darek"
   license: %license.md
-  version: 0.2.2
+  version: 0.2.3
   subversion: 'alpha
 ]
 ___old-console: copy/deep :system/console
 ___old-pre-load: :system/lexer/pre-load
 ___line-numbers: [1]
+___split-on-int: func [str n] [
+    collect [
+        while [not tail? str] [
+            keep copy/part str n 
+            str: skip str n
+        ]
+    ]
+]
 clean-console: does [
     gui-console-ctx/terminal/clean
     remove back tail gui-console-ctx/terminal/lines
@@ -85,8 +93,15 @@ make-prints: has[
   ]
   lines: split ___to-print "^/"
   foreach line lines [
-    prin "; "
-    print line
+    either system/console/size/x  < length? line[
+        foreach real-line (___split-on-int line system/console/size/x) [
+            prin "; "
+            print real-line
+        ]
+    ][
+        prin "; "
+        print line
+    ]
   ]
   clear ___to-print
   exit
